@@ -1,0 +1,28 @@
+// using two pointer
+public class BestTimetoBuyandSellStock_121 {
+	public int maxProfit(int[] prices) {
+		Integer left_loc=0;
+		Integer right_loc=1;
+		Integer profit = 0;
+		
+		while(left_loc < prices.length && right_loc < prices.length) {
+    
+    // when current profit exceeds stored max profit --> update
+			if(prices[right_loc]-prices[left_loc]>profit) {
+				profit = prices[right_loc]-prices[left_loc];
+			}
+    // when profit is minus value --> move left pointer / else: move right pointer
+			if(prices[right_loc]-prices[left_loc]<0){
+				left_loc++;
+			}
+			else{
+				right_loc++;
+			}
+			
+			if(left_loc >= right_loc) {
+				right_loc = left_loc+1;
+			}
+		}
+		return profit;
+	}
+}
