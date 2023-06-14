@@ -1,0 +1,14 @@
+public boolean containsDuplicate(int[] nums) {
+// Use HashSet since contains() method is executed faster in HashSet
+		HashSet <Integer> twice_list = new HashSet<>();
+		
+		for (Integer loc = 0; loc<nums.length;loc++) {
+			if(!twice_list.contains(nums[loc])) {
+				twice_list.add(nums[loc]);
+			}
+			else{
+				return true;
+			}
+		}
+        return false;
+    }
