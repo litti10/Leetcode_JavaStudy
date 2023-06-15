@@ -1,0 +1,43 @@
+public int maxSubArray(int[] nums) {
+    Integer l_loc = 0;
+    Integer r_loc = 0;
+
+    Integer sum = nums[0];
+    Integer max_sum = sum;
+        
+   // length 1 - return itself
+		if (nums.length == 1){
+			return sum;
+		}
+    
+    // length longer than 1 - two pointer
+    while (true) {
+      if (sum < 0) {
+        l_loc++;
+        // exceed list
+        if(l_loc==nums.length) {
+          break;
+    }
+    // left pointer goes foward than right pointer --> move right pointer to left pointer's position
+    else if(l_loc > r_loc) {
+          r_loc = l_loc;
+          sum = nums[r_loc];
+        }
+    else{
+      sum -= nums[l_loc-1];
+    }
+      }
+      else {
+        r_loc ++;
+        if (r_loc == nums.length) {
+            break;
+          }
+        else {
+          sum += nums[r_loc];
+        }
+      }
+      // save max value
+      max_sum = Math.max(max_sum,sum);
+    }
+    return max_sum;
+}
