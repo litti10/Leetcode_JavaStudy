@@ -1,0 +1,54 @@
+class Solution {
+    public int maxProduct(int[] nums) {
+        Integer temp_product = 1;
+        Integer max_product = Integer.MIN_VALUE;
+        Integer minus_num = 0;
+        Integer loc;
+        Queue<Integer> minusLoc_stack = new LinkedList<>();
+        boolean FLAG = true;
+
+        for(loc = 0;loc<nums.length;loc++){
+            if(nums[loc]<0){
+            	minusLoc_stack.add(loc);
+                minus_num++;
+            }
+        }
+        Integer minList_length = minus_num;
+
+        loc=0;
+        while(loc<nums.length) {
+        	temp_product *= nums[loc];
+        	// 만약 음수일 때, minus_num 값 차감
+        	if(nums[loc]<0) {
+        		minus_num--;
+        	}
+        	
+        	max_product = Math.max(max_product, temp_product);
+        	
+        	//2 현재 곱한 값이 음수일 때 & 앞에 음수가 없을 
+        	if (temp_product<0 && minus_num==0) {
+        		temp_product = 1;
+        	}
+        	//3 0일 때
+        	else if(temp_product==0) {
+        		temp_product = 1;
+        	}
+        	loc++;
+        	
+        	if(loc>=nums.length && minusLoc_stack.size()>1) {
+                if(FLAG){
+                    loc = minusLoc_stack.poll()+1;
+                }
+                else{
+                    loc = minusLoc_stack.poll();
+                }
+        		
+                
+        		temp_product=1;
+        		minList_length --;
+        		minus_num = minList_length;
+        	}
+        }
+        return max_product;
+    }
+}
