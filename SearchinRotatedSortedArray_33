@@ -1,0 +1,34 @@
+public int search(int[] nums, int target) {
+		// nums의 첫번째 숫자보다 target이 작음 --> pivot 돌릴 때까지 스킵 
+		// nums의 첫번째 숫자보다 target이 큼 --> pivot 전까지 서치
+		
+		// pivot 위치 찾기
+		Integer pivot_loc = nums.length;
+		Integer idx;
+		for(idx=0;idx<nums.length-1;idx++) {
+			if(nums[idx]>nums[idx+1]) {
+				pivot_loc = idx+1;
+				break;
+			}
+		}
+		
+		if(target==nums[0]) {
+			return 0;
+		}
+		else if(target<nums[0]) {
+			for(idx=pivot_loc;idx<nums.length;idx++) {
+				if(nums[idx]==target) {
+					return idx;
+				}
+			}
+		}
+		else if(target>nums[0]) {
+			for(idx=0;idx<pivot_loc;idx++) {
+				if(nums[idx]==target) {
+					return idx;
+				}
+			}
+		}
+			
+		return -1;
+	}
