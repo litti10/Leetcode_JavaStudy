@@ -1,0 +1,18 @@
+public int findMin(int[] nums) {
+  //use Queue
+		Queue<Integer> num_Queue = new LinkedList<>();
+		
+		for(Integer elem:nums) {
+			num_Queue.add(elem);
+		}
+		
+    // if next element is smaller than previous element
+		while(num_Queue.size()>1) {
+			Integer idx = num_Queue.poll();
+			if(idx>num_Queue.peek()) {
+				return num_Queue.poll();
+			}
+		}
+    // if the array didn't rotate
+		return nums[0];
+    }
