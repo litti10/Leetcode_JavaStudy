@@ -1,0 +1,50 @@
+public List<List<Integer>> threeSum(int[] nums) {
+		// 두 수의 합을 찾는다 --> 순열 사용?
+		// 두 수의 합의 마이너스값이 list안의 값과 동일한 경우 --> 더하면 0이 나옴
+		
+		// 문제: 중복되는 값이 존재할 수도 있음 --> 아 그냥 nested loop 쓸란다
+		
+        HashMap<Integer,Integer> num_hMap = new HashMap<Integer,Integer>();
+        
+        // hashset에 값들 위치 저장(동일한 깂들이 들어있을 경우 대비)
+        for(Integer idx = 0;idx<nums.length;idx++) {
+        	if(!num_hMap.containsKey(nums[idx])) {
+        		num_hMap.put(nums[idx],1);
+        	}
+        	else {
+        		num_hMap.put(nums[idx], num_hMap.get(nums[idx]) + 1);
+        	}
+        	
+        }
+        
+        Integer loc1;
+        Integer loc2;
+        Integer sum;
+        List<List<Integer>> ans_list = new ArrayList<List<Integer>>();
+        
+        
+        for(loc1 = 0;loc1<nums.length-1;loc1++) {
+        	num_hMap.put(nums[loc1], num_hMap.get(nums[loc1]) - 1);
+        	for(loc2 = loc1+1;loc2<nums.length;loc2++) {
+        		num_hMap.put(nums[loc2], num_hMap.get(nums[loc2]) - 1);
+        		// --------------------------------------------------------
+        		sum = -(nums[loc1]+nums[loc2]);
+        		if(num_hMap.containsKey(sum)) {
+        			if(num_hMap.get(sum)>0) {
+                        System.out.printf("%d %d %d",nums[loc1],nums[loc2],sum);
+                        System.out.println("");
+                        System.out.println(num_hMap);
+        				List<Integer> temp_list = new ArrayList<Integer>(Arrays.asList(nums[loc1],nums[loc2],sum));
+        				Collections.sort(temp_list);
+        				if(!ans_list.contains(temp_list)) {
+    	        			ans_list.add(temp_list);
+        				}
+        			}
+        		}
+        		// --------------------------------------------------------
+        		num_hMap.put(nums[loc2], num_hMap.get(nums[loc2]) + 1);
+        	}
+        		num_hMap.put(nums[loc1], num_hMap.get(nums[loc1]) + 1);
+        }
+        return ans_list;
+	}
