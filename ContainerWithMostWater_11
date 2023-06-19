@@ -1,0 +1,40 @@
+public int maxArea(int[] height) {
+        Integer left_loc = 0;
+				Integer n = height.length;
+        Integer right_loc = n-1;
+        Integer area=0;
+        
+        while(left_loc<right_loc) {
+					if(height[left_loc]>height[right_loc]){
+						area = Math.max(area, (right_loc-left_loc)*height[right_loc]);
+						right_loc--;
+					}
+					else{
+						area = Math.max(area, (right_loc-left_loc)*height[left_loc]);
+						left_loc++;
+					}        	
+    	}
+			return area;
+	}
+
+
+// better solution from leetcode
+"""
+class Solution {
+    public int maxArea(int[] height) {
+        int area=Integer.MIN_VALUE;
+        int i=0,j=height.length-1;
+            while(j>i){
+                int dif = j-i; 
+                int h = Math.min(height[i], height[j]);
+                
+                area=Math.max(dif*h,area);
+                
+                // find the point where all number between height[i] and height[j] is smaller than the two numbers
+                while(height[i]<=h && j>i) i++ ;
+                while(height[j]<=h && j>i) j-- ;
+        }
+        return area;
+    }
+}
+"""
