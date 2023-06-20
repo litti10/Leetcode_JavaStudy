@@ -12,4 +12,4 @@ Jun 13, 2023: 1_TwoSums
 <br> Jun 19, 2023: 11_Container With Most Water
 
 ## Binary
-Jun 20, 2023: 191_Number of 1 Bits 
+Jun 20, 2023: 191_Number of 1 Bits / 338_Counting Bits
