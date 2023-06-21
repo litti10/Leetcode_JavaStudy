@@ -13,3 +13,4 @@ Jun 13, 2023: 1_TwoSums
 
 ## Binary
 Jun 20, 2023: 191_Number of 1 Bits / 338_Counting Bits
+<br>Jun 21, 2023: 268_Missing Number / 190_Reverse Bits
