@@ -1,0 +1,47 @@
+// 로직 생각한 건 자체는 맞았으나 구현하는 방법을 몰랐음...
+public class ReverseBits_190 {
+	public int reverseBits(int n) {
+		// 00000010100101000001111010011100
+		// 00111001011110000010100101000000
+    
+    // 원본수 왼쪽으로 밀고 밀은 수가 1이면 맨 끝자리 부호 1로 변환, 이후 제일 왼쪽에 있는 수 삭제?
+		Integer num = (Integer.toBinaryString(n)).length();
+    	for(int idx=0;idx<num;idx++) {
+    		
+            if((n & 1)==0) {
+            	n >>>= 1;
+            }
+            else {
+            	n >>>= 1;
+            	
+            	
+            }
+            n = clearBit(n,num);
+            n /= 1;
+            
+        }
+    	return n;
+    }
+	
+	int clearBit(int num, int i){
+		  int mask = ~(1 << i);
+		  return num & mask;
+		}
+	
+}
+
+// code from https://leetcode.com/problems/reverse-bits/solutions/54738/sharing-my-2ms-java-solution-with-explanation/
+"""
+public int reverseBits(int n) {
+    if (n == 0) return 0;
+    
+    int result = 0;
+    for (int i = 0; i < 32; i++) {
+        result <<= 1;
+        if ((n & 1) == 1) result++;
+        n >>= 1;
+    }
+    
+    return result;
+}
+"""
