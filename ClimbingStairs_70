@@ -1,0 +1,16 @@
+int[] step_list;
+	public int climbStairs(int n) {
+		step_list = new int[n+1];
+		
+        return getStep(n);
+    }
+	
+	public int getStep(int num) {
+		if (num==1) return 1;
+    // 2칸씩 내려갈 때 가능한 경우의 수: 1+1 / 2 --> 2개
+		if (num==2) return 2;
+		if (step_list[num]!=0) return step_list[num];
+    // recursion
+    // 경우의 수: 1칸씩 내려갈 때 + 2칸씩 내려갈 때
+		return step_list[num] = getStep(num-1)+getStep(num-2);
+	}
