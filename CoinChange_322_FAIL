@@ -1,0 +1,57 @@
+// time limit
+// dfs bfs 공부 필요
+
+int[] case_list;
+	public int coinChange(int[] coins, int amount) {
+		// 큰 수들부터 뺌
+		// 큰 수를 뺏을 때 안 먹히면 작은 수를 뺌
+		// case_list에는 특정 수를 구할 수 있는 최소한의 coin 값을 저장하고 싶음
+		if(amount==0) return 0;
+		Arrays.sort(coins);
+
+		case_list = new int[amount+1];
+
+		amount = getCase(coins,amount);
+		// for(int loc=0;loc<case_list.length;loc++){
+		// 	if(case_list[loc] !=0){
+		// 		System.out.print(loc);
+		// 		System.out.print(" // ");
+		// 		System.out.println(case_list[loc]);
+		// 	}
+		// }
+		if(amount==0) return -1;
+		else return amount;
+		
+    }
+	public int getCase(int[] coins, int num) {
+		// 한 번이라도 0이 나오면 이 쪽으로 가면 안 되게 하고 싶음
+		int coin_num = 0;
+		for(int loc=coins.length-1;loc>=0;loc--) {
+			// System.out.printf("num: %d coins[loc]: %d", num, coins[loc]);
+			// System.out.println("");
+			int multiply_num = num / coins[loc];
+			if (num-coins[loc]*multiply_num==0) {
+				return case_list[num] = multiply_num;
+			}
+
+			if(case_list[multiply_num*coins[loc]]==0) case_list[multiply_num*coins[loc]] = multiply_num;
+
+			while (multiply_num>0) {
+				coin_num = multiply_num + getCase(coins, num-coins[loc]*multiply_num);
+				if(coin_num != multiply_num) {
+					// System.out.printf("Coin_num: %d", coin_num);
+					// System.out.println("");
+					// System.out.printf("coins[loc]: %d", coins[loc]);
+					// System.out.println("");
+					// System.out.println("TEST");
+					if(case_list[num]==0) case_list[num] = coin_num;
+					else case_list[num] = Math.min(case_list[num], coin_num);
+					
+					return case_list[num];
+				}
+				multiply_num--;
+			}
+		}
+		return case_list[num];
+		
+	}
